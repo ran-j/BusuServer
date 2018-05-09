@@ -1,0 +1,9 @@
+{
+  "name": "ServidorBusu",
+  "version": "0.0.1",
+  "description": "Server de resposta para o app busu",
+  "dependencies": {
+    "express": "^4.16.3",
+    "socket.io": "^1.7.4"
+  }
+}

@@ -1,0 +1,78 @@
+ * { margin: 0; padding: 0; box-sizing: border-box; }
+     
+	  
+body { 
+	font: 13px Helvetica, Arial;
+	background-color:#1879B4; 
+	background-image: url(/img/Tipografia_Branca.png);
+	background-repeat:no-repeat;
+	background-position: 52% 230px;
+	background-size:76% 500px;
+}	  
+	  
+#centro{
+    width:80%;
+    height:80%;
+    position:fixed;
+    top:15%;
+    left:15%;
+    margin-top:1%;
+    margin-left:-50px;
+    z-index:1; 
+    overflow: auto;
+	background-color:rgba(0, 0, 0,0.4);
+
+}
+
+button{
+	font-size:30px;
+	background-color:#fff;
+	border:none;
+	color:#000;
+}
+#top{
+	background-image: url(/img/Tipografia_Branca.png);
+	width:100%;
+    height:40px;
+	background-size:6% 35px;
+	background-repeat:no-repeat;
+	background-position:53% 2px;
+}
+#mapass{
+	width:150px;
+    height:40px;
+	background-color:#fff;
+	border:none;
+}
+#imag{
+	width:100px;
+    height:60px;
+	float:left;
+	margin:2% 22% 2% 12%;
+	
+
+	background-position:13% 2px;
+	
+}
+div{
+	color:#fff;	
+}
+table{
+	width:100%;
+
+	
+}
+#usu{
+	background-color:#1879B4;
+	width:100%;
+	text-align:center;
+	font-size:40px;
+	color:#fff;
+	border: 1px solid #fff
+}
+#desconecta{
+	padding:2%;
+    height:60px;
+	text-align:center;
+	float:left;
+}

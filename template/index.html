@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <title>Servidor Busu</title>
+  </head>
+  
+<body onunload="aofechar()">
+
+<div data-role="page" id="start">
+  <div data-role="header" data-theme="b">
+    <h1>Painel de Usuários</h1>
+  </div>
+
+ <div data-role="footer" data-theme="b">
+    <div data-role="navbar">
+      <ul>
+        <li><a href="#showusu" data-transition="flip" data-icon="home">Ônibus</a></li>
+        <li><a href="#showhis" data-transition="flip" data-icon="info">Historico</a></li>
+      </ul>
+    </div>   
+  </div>
+  
+  
+	<style>
+		#start{
+			height: 100%;
+		}
+		
+		#showusu{
+			background: transparent url(http://1.bp.blogspot.com/-KRCtZN0bSH0/VVzgMQwTl-I/AAAAAAABJ5g/OpvrEJ2ZYyA/s1600/beira%2Brio%2Bbus.jpg) ;
+			-webkit-background-size: center;
+			-moz-background-size: center;
+			-o-background-size: center;
+			background-size: center;
+			background-size:100% 100%;
+			height: 100%;
+		}
+		
+       .center-wrapper{
+			text-align: center;
+		}
+		.center-wrapper * {
+			margin: 0 auto;
+		}
+		
+		#usu{
+			font-family:"Verdana";
+			font-size:50px;
+			color: White;
+		}
+		
+		.lofo {
+			width: 100%;
+			height:auto;
+			top: 0px;
+			left: 0px;
+			z-index: -1;
+			position: absolute;
+		}
+		 
+		th {
+			border-bottom: 1px solid #d6d6d6;
+		}
+
+		tr:nth-child(even) {
+			background: #e9e9e9;
+		}
+		
+		#map{
+			height: 100%;
+			width:100%;
+			position: absolute;
+		}
+		
+    </style>
+	
+	<div id="floating-panel">
+      <select id="rota">
+        <option value="">Selecione a rota</option>
+        <option value="555555">Todas as rotas</option>
+        <option value="0">Jockey X Santa Rosa/ida</option>
+        <option value="1">Jockey X Santa Rosa/volta</option>
+        <option value="2">P.Aurora X Leão/ida</option>
+        <option value="3">P.Aurora X Leão/volta</option>
+        <option value="4">Morro do coco volta</option>
+        <option value="5">P. Prazeres x IPS via J. Maria/Volta</option>
+        <option value="6">P. Prazeres x IPS via J. Maria/ida</option>
+        <option value="7">CeasaxStoAntonio/ida</option>
+        <option value="8">CeasaxStoAntonio/volta</option>
+        <option value="9">Eldorado Codin/Ida</option>
+        <option value="10">Eldorado Codin/volta</option>
+        <option value="11">Centro/Eldorado</option>
+        <option value="12">Eldorado/centro</option>
+        <option value="13">Nova campos via Novo Mundo/ida</option>
+        <option value="14">Nova campos via Novo Mundo/volta</option> 
+        <option value="15">Fundão/Centro</option>
+        <option value="16">Centro/Fundão</option>
+        <option value="17">Cidade Luz/ volta</option>
+        <option value="18">Cidade Luz/ ida</option>
+        <option value="19">Bonsucesso X Centro</option>
+        <option value="20">Centro X Bonsucesso</option>
+        <option value="21">Ribeiro do Amaro X Rodoviaria</option>
+        <option value="22">Rodoviaria X Ribeiro do Amaro</option>
+        <option value="23">P.Prazeres X IPS via Leão/Ida</option>
+        <option value="24">P.Prazeres X IPS via Leão/Volta</option>
+        <option value="25">Calabouco Sta Cecília/Volta</option>
+        <option value="26">Calabouco Sta Cecília/Ida</option>
+        <option value="27">Escola Agrotécnica/Ida</option>
+        <option value="28">Escola Agrotécnica/Volta</option>
+        <option value="29">Lagoa das Pedras/Ida</option>
+        <option value="30">Lagoa das Pedras/Volta</option>
+        <option value="31">P.Prazeres X Alphaville/Volta</option>
+        <option value="32">P.Prazeres X Alphaville/Ida</option>
+        <option value="33">NovaCampos/Ida</option>
+        <option value="34">NovaCampos/volta</option>
+        <option value="35">Nova Campos via N.Mundo-Custódia/Ida</option>
+        <option value="36">Nova Campos via N.Mundo-Custódia/Volta</option>
+        <option value="37">Nova Campos via Nogueira/Ida</option>
+        <option value="38">Nova Campos via Nogueira/Volta</option>
+        <option value="39">P.Guarus via Nogueira/Ida</option>
+        <option value="40">P.Guarus via Nogueira/Volta</option>
+        <option value="41">Sto Eduardo/Ida</option>
+        <option value="42">Sto Eduardo/Volta</option>
+        <option value="43">Rodoviária X Travessão</option>
+        <option value="44">Travessão X Rodoviária</option>
+      </select> 
+    </div>
+	
+	<div id="map"></div>
+
+</div> 
+</div> 
+
+<div data-role="page" id="showhis">
+    <div data-role="header" data-theme="b">
+	<a href="#start" class="ui-btn ui-btn-b ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Inicio</a>
+    <h1>Historico dos ônibus</h1>
+  </div>
+  
+   <table data-role="table"  class="ui-responsive ui-shadow" id="bustable">
+      <thead>
+        <tr>
+          <th data-priority="1">Busu</th>
+          <th data-priority="2">Latitude</th>
+          <th data-priority="3">Longitude</th>
+          <th data-priority="4">Data</th>
+          <th data-priority="5">Hora</th>
+        </tr>
+      </thead>
+      <tbody>	
+      </tbody>
+    </table>
+   
+</div> 
+
+
+<div data-role="page" id="showusu">
+  <div data-role="header" data-theme="b">
+	<a href="#start" class="ui-btn ui-btn-b ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Inicio</a>
+     <h1>Usuários</h1>
+  </div>
+ 	<div class="center-wrapper">
+		</br>
+		
+		<div id="usu" data-role="button">Carregando dados...</div>
+	</div>
+      
+	  <div data-role="footer" data-theme="b" data-position="fixed" style="text-align:center;">
+		<a onclick=""tombageral() class="ui-btn ui-corner-all ui-shadow ui-icon-plus ui-	btn-icon-left">Desconectar Usuários</a>
+ 
+	</div>
+</div> 
+
+
+
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+<script src="js/mapa_jav.js"></script>
+<script src="js/alerta.js"></script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBacDiCpAbA6Clh3q4FMAi1OT-qZk8no8I&callback=initMap"></script>
+</body>
+</html>
+
+  
+  
+  
