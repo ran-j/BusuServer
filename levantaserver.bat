@@ -2,7 +2,7 @@
 echo.
 Color 0a
 Title Server Busu
-echo Criando Build.
+echo Iniciando server.
 mode 5000,5000
-cd C:\Users\Emails\Desktop\server-busu
-nodemon index.js
+if not exist node_modules echo Baixando pacotes&npm install
+node index.js
